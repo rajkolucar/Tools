@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    tools:context="lucar.rajko.rmi.tools.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/gyroscope"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/round_frame_layout">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_gyro"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Gyroscope"
+                android:textSize="18sp"
+                android:textColor="@color/colorWhite"
+                android:gravity="bottom|center"
+                android:layout_marginBottom="25dp"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/bulb"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/round_frame_layout">
+
+            <ImageView
+                android:id="@+id/bulb_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_bulb"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Bulb"
+                android:textSize="18sp"
+                android:textColor="@color/colorWhite"
+                android:gravity="bottom|center"
+                android:layout_marginBottom="25dp"/>
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/qrcode_open"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/round_frame_layout">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_qr_code" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="QR Code Scanner"
+                android:textSize="18sp"
+                android:textColor="@color/colorWhite"
+                android:gravity="bottom|center"
+                android:layout_marginBottom="25dp"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/mirror"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/round_frame_layout">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_mirror" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Mirror"
+                android:textSize="18sp"
+                android:textColor="@color/colorWhite"
+                android:gravity="bottom|center"
+                android:layout_marginBottom="25dp"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/round_frame_layout">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_compass" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Compass"
+                android:textSize="18sp"
+                android:textColor="@color/colorWhite"
+                android:gravity="bottom|center"
+                android:layout_marginBottom="25dp"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/pass_generator"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="0.5"
+            android:layout_gravity="center"
+            android:background="@drawable/round_frame_layout">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_pass_gen" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:lines="2"
+                android:text="Password \n generator"
+                android:textSize="18sp"
+                android:textColor="@color/colorWhite"
+                android:gravity="bottom|center"
+                android:layout_marginBottom="25dp"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.10"
+        android:background="@color/colorBlack"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_settings" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_about"
+            android:layout_marginLeft="100dp"/>
+
+
+    </LinearLayout>
+</LinearLayout>

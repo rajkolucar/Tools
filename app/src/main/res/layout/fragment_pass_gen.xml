@@ -1,0 +1,115 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="lucar.rajko.rmi.tools.fragments.LibelFragment"
+    android:background="@color/colorBlack">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Set password length: "
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/pass_length"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_marginLeft="170dp"
+            android:layout_marginTop="40dp"
+            android:ems="10"
+            android:gravity="left|center"
+            android:inputType="textPersonName"
+            android:text="8"
+            android:textColor="@color/colorWhite" />
+
+        <Button
+            android:id="@+id/pass_length_minus"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="210dp"
+            android:layout_marginTop="43dp"
+            android:text="-"/>
+        <Button
+            android:id="@+id/pass_length_plus"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="260dp"
+            android:layout_marginTop="43dp"
+            android:text="+"/>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/generated_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.3"
+        android:layout_marginTop="130dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textSize="20sp"
+        android:text="generated password.."
+        android:textColor="@color/colorWhite"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_weight="0.3"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/copy_to_clipboard"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/round_frame_layout">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="copy to clipboard"
+                android:textSize="20sp"
+                android:textColor="@color/colorWhite"
+                android:gravity="center" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/pass_gen"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/round_frame_layout">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="generate"
+                android:textSize="20sp"
+                android:textColor="@color/colorWhite"
+                android:gravity="center" />
+        </FrameLayout>
+
+    </LinearLayout>
+</FrameLayout>

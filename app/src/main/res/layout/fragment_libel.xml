@@ -1,0 +1,36 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="lucar.rajko.rmi.tools.fragments.LibelFragment"
+        android:background="@color/colorBlack">
+
+
+        <FrameLayout
+            android:id="@+id/big_circle_stroke"
+            android:layout_width="310dp"
+            android:layout_height="310dp"
+            android:layout_gravity="center"
+            android:background="@drawable/circle_stroke">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/small_circle_stroke"
+            android:layout_width="106dp"
+            android:layout_height="106dp"
+            android:layout_gravity="center"
+            android:background="@drawable/circle_stroke">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/circle_solid"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_gravity="center"
+            android:background="@drawable/circle_solid">
+
+        </FrameLayout>
+</FrameLayout>
+
