@@ -1,6 +1,5 @@
 package lucar.rajko.rmi.tools.fragments;
 
-import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -10,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,12 +27,6 @@ public class LibelFragment extends Fragment implements SensorEventListener {
 
     private int screenWidth;
     private int screenHeight;
-
-    private boolean leftPressed;
-    private boolean rightPressed;
-
-    private static final int DEFAULT_SPEED = 2;
-    private static final double DEFAULT_TOLERANCE = 0;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -70,9 +62,11 @@ public class LibelFragment extends Fragment implements SensorEventListener {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+
     TextView textX, textY, textZ;
     SensorManager sensorManager;
     Sensor sensor;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_libel, container, false);
@@ -106,68 +100,72 @@ public class LibelFragment extends Fragment implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
 
-        float angleAroundYAxis, aY;
-        leftPressed = false;
-        rightPressed = false;
+        float angleAroundYAxis, angleAroundXAxis;
         angleAroundYAxis = sensorEvent.values[2];
-        float percentOfAngle = angleAroundYAxis / 45;
-        float pixelOfScreen;
-        if (percentOfAngle < 1 && percentOfAngle > -1) {
-             pixelOfScreen = percentOfAngle * (screenWidth / 2);
-        } else if (percentOfAngle >= 1){
-            pixelOfScreen = (screenWidth / 2);
-        } else {
-            pixelOfScreen = -(screenWidth / 2);
+        angleAroundXAxis = sensorEvent.values[1];
+
+        float percentOfAngleX = -angleAroundXAxis / 45;
+        float percentOfAngleY = -angleAroundYAxis / 45;
+
+        float distanceFromMiddleOfScreenY;
+        float distanceFromMiddleOfScreenX;
+
+        //if znaci da je ugao od -45 do 45 stepeni
+        if (percentOfAngleY < 1 && percentOfAngleY > -1) {
+            distanceFromMiddleOfScreenY = percentOfAngleY * (screenWidth / 2);//da bi znao na kojoj poziciji treba da bude kuglica
+            int positionX = 0;
+
+            //distanceFrom... je minus kad nagnemo levo
+            //distanceFrom... je plus kad nagnemo desno
+
+            positionX = (int) (screenWidth / 2 - distanceFromMiddleOfScreenY - circleSolid.getWidth() / 2);
+
+            if (wouldBeInWindowX(positionX, circleSolid)) {
+                circleSolid.setX(positionX);
+            }
+        } else if (percentOfAngleY <= -1) { //ovo znaci da je jednako ili preslo 45 stepeni leva strana
+            if (wouldBeInWindowX(screenWidth - circleSolid.getWidth(), circleSolid)) {
+                circleSolid.setX(screenWidth - circleSolid.getWidth());
+            }
+        } else { //ovo znaci isto kao i iznad samo u drugu stranu (-45)
+            circleSolid.setX(0);
+
         }
-        if (angleAroundYAxis > DEFAULT_TOLERANCE) {
-            leftPressed = true;
-            moveLeft(DEFAULT_SPEED, pixelOfScreen);
-        } else if (angleAroundYAxis < DEFAULT_TOLERANCE) {
-            rightPressed = true;
-            moveRight(DEFAULT_SPEED, pixelOfScreen);
+
+        if (percentOfAngleX < 1 && percentOfAngleX > -1) {
+            distanceFromMiddleOfScreenX = percentOfAngleX * (screenHeight / 2);//da bi znao na kojoj poziciji treba da bude kuglica
+            int positionY = 0;
+
+            //distanceFrom... je minus kad nagnemo levo
+            //distanceFrom... je plus kad nagnemo desno
+
+            positionY = (int) (screenHeight / 2 - distanceFromMiddleOfScreenX - circleSolid.getHeight() / 2);
+
+            if (wouldBeInWindowY(positionY, circleSolid)) {
+                circleSolid.setY(positionY);
+            }
+        } else if (percentOfAngleX <= -1) { //ovo znaci da je jednako ili preslo 45 stepeni leva strana
+            if (wouldBeInWindowY(screenHeight - circleSolid.getHeight(), circleSolid)) {
+                circleSolid.setY(screenHeight- circleSolid.getHeight());
+            }
+        } else { //ovo znaci isto kao i iznad samo u drugu stranu (-45)
+            circleSolid.setY(0);
+
         }
+
+
     }
 
-    private boolean wouldBeInWindow(int speed) {
-        float value = circleSolid.getX() + speed;
-        return !((value < 0) || value + circleSolid.getWidth() > screenWidth);
+    private boolean wouldBeInWindowX(int value, FrameLayout frame) {
+        return 0 <= value && value <= screenWidth - frame.getWidth();
+    }
+
+    private boolean wouldBeInWindowY(int value, FrameLayout frame) {
+        return 0 <= value && value <= screenHeight - frame.getHeight();
     }
 
     private void move(final int speed, final float pixelOfScreen) {
-        if (runnable != null) {
-            handler.removeCallbacks(runnable);
-        }
-        final float destinationPixel = screenWidth/2 -pixelOfScreen;
-        runnable = new Runnable() {
-            @Override
-            public void run() {
-                if (destinationPixel > screenWidth/2){//desno
-                    if (wouldBeInWindow(speed) && circleSolid.getX() + circleSolid.getWidth() < destinationPixel) {
-                        circleSolid.setX(circleSolid.getX() + speed);
-                    } else {
-                        handler.removeCallbacks(this);
-                    }
-                } else {//levo
-                    if (wouldBeInWindow(speed) && circleSolid.getX() > destinationPixel) {
-                        circleSolid.setX(circleSolid.getX() + speed);
-                    } else {
-                        handler.removeCallbacks(this);
-                    }
-                }
 
-                circleSolid.invalidate();
-                if (leftPressed || rightPressed) {
-                    handler.postDelayed(this, 1);
-                } else {
-                    handler.removeCallbacks(this);
-                }
-            }
-        };
-        if (leftPressed || rightPressed) {
-            handler.postDelayed(runnable, 1);
-        } else {
-            handler.removeCallbacks(runnable);
-        }
     }
 
     private void moveLeft(final int speed, float pixelOfScreen) {
