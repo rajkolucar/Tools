@@ -1,5 +1,6 @@
 package lucar.rajko.rmi.tools.fragments;
 
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -8,12 +9,18 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.gms.vision.Frame;
 
 import lucar.rajko.rmi.tools.R;
 
@@ -38,9 +45,6 @@ public class LibelFragment extends Fragment implements SensorEventListener {
     private FrameLayout smallCircleStroke;
     private FrameLayout circleSolid;
 
-    private Handler handler;
-    private Runnable runnable;
-
     public LibelFragment() {
         // Required empty public constructor
     }
@@ -63,10 +67,6 @@ public class LibelFragment extends Fragment implements SensorEventListener {
         }
     }
 
-    TextView textX, textY, textZ;
-    SensorManager sensorManager;
-    Sensor sensor;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_libel, container, false);
@@ -84,7 +84,6 @@ public class LibelFragment extends Fragment implements SensorEventListener {
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         screenHeight = displaymetrics.heightPixels;
         screenWidth = displaymetrics.widthPixels;
-        handler = new Handler();
 
         return root;
     }
@@ -152,8 +151,7 @@ public class LibelFragment extends Fragment implements SensorEventListener {
             circleSolid.setY(0);
 
         }
-
-
+        checkPositionOfCircle(circleSolid);
     }
 
     private boolean wouldBeInWindowX(int value, FrameLayout frame) {
@@ -164,16 +162,15 @@ public class LibelFragment extends Fragment implements SensorEventListener {
         return 0 <= value && value <= screenHeight - frame.getHeight();
     }
 
-    private void move(final int speed, final float pixelOfScreen) {
 
-    }
-
-    private void moveLeft(final int speed, float pixelOfScreen) {
-        move(-speed, pixelOfScreen);
-    }
-
-    private void moveRight(final int speed, float pixelOfScreen) {
-        move(speed, pixelOfScreen);
+    public void checkPositionOfCircle(FrameLayout frameLayout) {
+        boolean xValid = circleSolid.getX() > smallCircleStroke.getX() && circleSolid.getX() + circleSolid.getWidth() < smallCircleStroke.getX() + smallCircleStroke.getWidth();
+        boolean yValid = circleSolid.getY() > smallCircleStroke.getY() && circleSolid.getY() + circleSolid.getHeight() < smallCircleStroke.getY() + smallCircleStroke.getHeight();
+        if (xValid && yValid) {
+            frameLayout.setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.drawable.circle_solid_green));
+        } else {
+            frameLayout.setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.drawable.circle_solid));
+        }
     }
 
     @Override

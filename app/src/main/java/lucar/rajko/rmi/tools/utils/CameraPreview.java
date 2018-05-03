@@ -42,6 +42,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
             Camera.CameraInfo ci = new Camera.CameraInfo();
             if (ci.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
                 mCamera.setPreviewDisplay(surfaceHolder);
+                mCamera.getParameters().setAutoWhiteBalanceLock(true);
                 mCamera.startPreview();
             }
         } catch (IOException e) {

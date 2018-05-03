@@ -25,7 +25,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="15dp"
                 android:src="@drawable/ic_gyro"/>
             <TextView
                 android:layout_width="match_parent"
@@ -34,7 +35,7 @@
                 android:textSize="18sp"
                 android:textColor="@color/colorWhite"
                 android:gravity="bottom|center"
-                android:layout_marginBottom="25dp"/>
+                android:layout_marginBottom="15dp"/>
 
         </FrameLayout>
 
@@ -50,7 +51,8 @@
                 android:id="@+id/bulb_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="15dp"
                 android:src="@drawable/ic_bulb"/>
             <TextView
                 android:layout_width="match_parent"
@@ -59,7 +61,7 @@
                 android:textSize="18sp"
                 android:textColor="@color/colorWhite"
                 android:gravity="bottom|center"
-                android:layout_marginBottom="25dp"/>
+                android:layout_marginBottom="15dp"/>
         </FrameLayout>
 
     </LinearLayout>
@@ -81,7 +83,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="15dp"
                 android:src="@drawable/ic_qr_code" />
             <TextView
                 android:layout_width="match_parent"
@@ -90,7 +93,7 @@
                 android:textSize="18sp"
                 android:textColor="@color/colorWhite"
                 android:gravity="bottom|center"
-                android:layout_marginBottom="25dp"/>
+                android:layout_marginBottom="15dp"/>
 
         </FrameLayout>
 
@@ -105,7 +108,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="15dp"
                 android:src="@drawable/ic_mirror" />
             <TextView
                 android:layout_width="match_parent"
@@ -114,7 +118,7 @@
                 android:textSize="18sp"
                 android:textColor="@color/colorWhite"
                 android:gravity="bottom|center"
-                android:layout_marginBottom="25dp"/>
+                android:layout_marginBottom="15dp"/>
 
         </FrameLayout>
 
@@ -137,7 +141,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="15dp"
                 android:src="@drawable/ic_compass" />
             <TextView
                 android:layout_width="match_parent"
@@ -146,7 +151,7 @@
                 android:textSize="18sp"
                 android:textColor="@color/colorWhite"
                 android:gravity="bottom|center"
-                android:layout_marginBottom="25dp"/>
+                android:layout_marginBottom="15dp"/>
 
         </FrameLayout>
 
@@ -162,17 +167,18 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="15dp"
                 android:src="@drawable/ic_pass_gen" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:lines="2"
-                android:text="Password \n generator"
+                android:text="Password generator"
                 android:textSize="18sp"
                 android:textColor="@color/colorWhite"
                 android:gravity="bottom|center"
-                android:layout_marginBottom="25dp"/>
+                android:layout_marginBottom="15dp"/>
         </FrameLayout>
     </LinearLayout>
 </LinearLayout>

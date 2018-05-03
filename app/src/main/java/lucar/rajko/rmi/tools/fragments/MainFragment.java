@@ -5,16 +5,18 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import lucar.rajko.rmi.tools.ActivityMirror;
 import lucar.rajko.rmi.tools.MainActivity;
+import lucar.rajko.rmi.tools.QRCodeActivity;
 import lucar.rajko.rmi.tools.R;
 import lucar.rajko.rmi.tools.utils.FlashLightUtils;
 
@@ -37,6 +39,7 @@ public class MainFragment extends Fragment {
 
     private FrameLayout qrcodeFrame;
     private FrameLayout mirrorFrame;
+    private FrameLayout compass;
 
     public MainFragment() {
         // Required empty public constructor
@@ -67,6 +70,7 @@ public class MainFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_main, container, false);
 
         bulbFrame = root.findViewById(R.id.bulb);
+
         flashLightUtils = FlashLightUtils.getInstance(getContext());
         flashLightUtils.isFlashAvailable(getContext());
         final ImageView bulbImageView = root.findViewById(R.id.bulb_image);
@@ -106,47 +110,68 @@ public class MainFragment extends Fragment {
             }
         });
 
-        qrcodeFrame = root.findViewById(R.id.qrcode_open);
-        qrcodeFrame.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((MainActivity) getActivity()).showFragment(new QRCodeFragment(), true);
-            }
-        });
-
         mirrorFrame = root.findViewById(R.id.mirror);
         mirrorFrame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                flashLightUtils.turnOffFlashLight();
-                if (checkCameraHardware(getContext())) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        Intent intent = new Intent(getActivity(), ActivityMirror.class);
-                        startActivity(intent);
-                    } else {
-                        ((MainActivity) getActivity()).showFragment(new MirrorFragment(), true);
-                    }
+//                flashLightUtils.turnOffFlashLight();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    Log.e(TAG, "onClick: sestica");
+                    Intent intent = new Intent(getActivity(), ActivityMirror.class);
+                    startActivity(intent);
                 } else {
-                    Toast.makeText(getContext(), "Your device does not have camera!", Toast.LENGTH_SHORT).show();
+                    ((MainActivity) getActivity()).showFragment(new MirrorFragment(), true);
                 }
             }
         });
+
+        compass = root.findViewById(R.id.compass_open);
+        compass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity) getActivity()).showFragment(new CompassFragment(), true);
+            }
+        });
+
+        qrcodeFrame = root.findViewById(R.id.qrcode_open);
+        qrcodeFrame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), QRCodeActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return root;
     }
 
-    private boolean checkCameraHardware(Context context) {
-        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
-            // this device has a camera
-            return true;
-        } else {
-            // no camera on this device
-            return false;
-        }
-    }
+//    private boolean checkCameraHardware(Context context) {
+//        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+//            // this device has a camera
+//            return true;
+//        } else {
+//            // no camera on this device
+//            return false;
+//        }
+//    }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public void onPause() {
+        if (flashLightUtils.getCamera() != null) {
+
+            flashLightUtils.getCamera().release();
+        }
+        super.onPause();
     }
 
     @Override

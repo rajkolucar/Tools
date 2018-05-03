@@ -17,12 +17,13 @@ public class CameraUtils {
 
     private static CameraUtils instance = null;
 
-    public static CameraUtils getInstance() {
-        if (instance == null) {
-            instance = new CameraUtils();
-        }
-        return instance;
-    }
+
+//    public static CameraUtils getInstance() {
+//        if (instance == null) {
+//            instance = new CameraUtils();
+//        }
+//        return instance;
+//    }
 
     public static Camera getCameraInstance() {
         Camera c = null;

@@ -38,7 +38,6 @@ public class FlashLightUtils {
         camera = CameraUtils.getCameraInstance();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             mCameraManager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
-
             try {
                 mCameraId = mCameraManager.getCameraIdList()[0];
             } catch (CameraAccessException e) {
@@ -106,10 +105,6 @@ public class FlashLightUtils {
         } else {
             imageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_bulb));
         }
-    }
-
-    public static void setInstance(FlashLightUtils instance) {
-        FlashLightUtils.instance = instance;
     }
 
     public boolean isTorchOn() {

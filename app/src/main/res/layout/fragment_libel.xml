@@ -5,23 +5,12 @@
         tools:context="lucar.rajko.rmi.tools.fragments.LibelFragment"
         android:background="@color/colorBlack">
 
-
-        <FrameLayout
-            android:id="@+id/big_circle_stroke"
-            android:layout_width="310dp"
-            android:layout_height="310dp"
-            android:layout_gravity="center"
-            android:background="@drawable/circle_stroke">
-
-        </FrameLayout>
-
         <FrameLayout
             android:id="@+id/small_circle_stroke"
             android:layout_width="106dp"
             android:layout_height="106dp"
             android:layout_gravity="center"
             android:background="@drawable/circle_stroke">
-
         </FrameLayout>
 
         <FrameLayout
@@ -30,7 +19,6 @@
             android:layout_height="96dp"
             android:layout_gravity="center"
             android:background="@drawable/circle_solid">
-
         </FrameLayout>
 </FrameLayout>
 

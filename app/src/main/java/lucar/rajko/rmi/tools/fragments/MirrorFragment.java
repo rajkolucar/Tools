@@ -46,9 +46,7 @@ public class MirrorFragment extends Fragment {
         }
         mCamera = getCameraInstance();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
-        } else {
+        if (!(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)) {
             if (mCamera != null) {
                 mPreview = new CameraPreview(getContext(), mCamera);
                 FrameLayout preview = (FrameLayout) root.findViewById(R.id.camera_preview);
@@ -66,5 +64,14 @@ public class MirrorFragment extends Fragment {
             getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         }
         super.onDetach();
+    }
+
+    @Override
+    public void onPause() {
+        if (mCamera != null) {
+            mCamera.stopPreview();
+            mCamera.release();
+        }
+        super.onPause();
     }
 }
